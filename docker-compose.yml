@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  ai-backend:
+    build:
+      context: ./ai-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=true
+      - PORT=8000
+    volumes:
+      - ./ai-backend/app:/app/app
+    restart: always
+
+  xr-frontend:
+    image: node:20-slim
+    working_dir: /app
+    volumes:
+      - ./xr-frontend:/app
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    depends_on:
+      - ai-backend
+    restart: always

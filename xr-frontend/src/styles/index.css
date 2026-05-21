@@ -1,0 +1,274 @@
+/* Custom styles for XR Astra - Futuristic AI Spatial OS */
+
+:root {
+  --color-bg: #030712;
+  --color-primary: #06b6d4; /* Cyan */
+  --color-primary-glow: rgba(6, 182, 212, 0.35);
+  --color-secondary: #a855f7; /* Purple */
+  --color-secondary-glow: rgba(168, 85, 247, 0.35);
+  --color-emerald: #10b981; /* Green success */
+  --color-emerald-glow: rgba(16, 185, 129, 0.35);
+  --color-rose: #f43f5e; /* Red alert */
+  --color-rose-glow: rgba(244, 63, 94, 0.35);
+  
+  --glass-bg: rgba(15, 23, 42, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-glow: rgba(6, 182, 212, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --glass-blur: blur(16px);
+  
+  --font-display: 'Orbitron', sans-serif;
+  --font-accent: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: #f3f4f6;
+  font-family: var(--font-sans);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  user-select: none;
+}
+
+/* Background Cyber Grid Matrix */
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.1) 0%, rgba(3, 7, 18, 0.95) 100%),
+    linear-gradient(to right, rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+  animation: slowPulse 10s ease-in-out infinite alternate;
+}
+
+/* Glassmorphism Containers */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+  border-color: var(--glass-border-glow);
+  box-shadow: var(--glass-shadow), 0 0 15px var(--color-primary-glow);
+}
+
+.glass-panel-purple {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+}
+
+.glass-panel-purple:hover {
+  border-color: var(--color-secondary-glow);
+  box-shadow: var(--glass-shadow), 0 0 15px var(--color-secondary-glow);
+}
+
+/* Glass Card Premium Hover Effect */
+.interactive-glass {
+  cursor: pointer;
+}
+
+.interactive-glass:active {
+  transform: scale(0.98);
+}
+
+/* Text Stylings */
+.title-glow {
+  font-family: var(--font-display);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fff 30%, var(--color-primary) 70%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+.subtitle-tech {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.data-mono {
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+}
+
+/* Scrollbar customizations */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Animations */
+@keyframes slowPulse {
+  0% { opacity: 0.8; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse-slow {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes ping-glow {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-reverse-slow {
+  animation: spin-reverse-slow 25s linear infinite;
+}
+
+.animate-ping-glow {
+  animation: ping-glow 3s infinite ease-in-out;
+}
+
+/* Scanning line overlay */
+.scanner-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(6, 182, 212, 0.07) 50%,
+    rgba(6, 182, 212, 0.15) 50.5%,
+    transparent 51%,
+    transparent 100%
+  );
+  background-size: 100% 8px;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Glowing text & statuses */
+.glow-cyan {
+  text-shadow: 0 0 8px var(--color-primary);
+}
+.glow-purple {
+  text-shadow: 0 0 8px var(--color-secondary);
+}
+.glow-emerald {
+  text-shadow: 0 0 8px var(--color-emerald);
+}
+
+/* Audio waves custom transitions */
+.audio-bar {
+  transition: height 0.08s ease-in-out;
+}
+
+/* Custom layout modules */
+.hologram-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 340px;
+  grid-template-rows: 70px 1fr;
+  height: 100vh;
+  padding: 16px;
+  gap: 16px;
+  z-index: 10;
+  position: relative;
+}
+
+.viewport-container {
+  grid-column: 2;
+  grid-row: 2;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-left {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.sidebar-right {
+  grid-column: 3;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}

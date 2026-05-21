@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xr-astra-backend
+  namespace: default
+  labels:
+    app: xr-astra-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: xr-astra-backend
+  template:
+    metadata:
+      labels:
+        app: xr-astra-backend
+    spec:
+      containers:
+      - name: backend
+        image: gcr.io/xr-astra-prod/ai-backend:v2.0
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DEBUG
+          value: "false"
+        resources:
+          limits:
+            cpu: "2"
+            memory: 4Gi
+          requests:
+            cpu: "500m"
+            memory: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: xr-astra-backend-service
+  namespace: default
+spec:
+  selector:
+    app: xr-astra-backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xr-astra-frontend
+  namespace: default
+  labels:
+    app: xr-astra-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: xr-astra-frontend
+  template:
+    metadata:
+      labels:
+        app: xr-astra-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: gcr.io/xr-astra-prod/xr-frontend:v2.0
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: "1"
+            memory: 2Gi
+          requests:
+            cpu: "250m"
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: xr-astra-frontend-service
+  namespace: default
+spec:
+  selector:
+    app: xr-astra-frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer

@@ -1,0 +1,24 @@
+# Node
+node_modules/
+dist/
+build/
+.env
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+
+# Spatial local DBs
+*.db
+spatial_memory.db
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+.gemini/
